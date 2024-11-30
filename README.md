@@ -1,60 +1,79 @@
-# Create TypeScript Package
+# Rezpond
 
-A template project for developing & publishing TypeScript packages.
+`rezpond` is a simple, lightweight, and easy-to-use mock implementation of react.
 
-## Configuration
+## Installation
 
-1. Replace the package name, description, author, license, etc. in the [package.json](./package.json) with your package's details
+```bash
+npm install rezpond
+```
 
-2. Update this [README.md](./README.md) file to contain your package's documentation
+## Usage
 
-3. Update the [release.yml](.github/workflows/release.yml) workflow to check for your username when publishing (this is used to prevent the workflow from running in forks):
+```typescript
+import { rezpond } from 'rezpond';
+```
 
-   ```yaml
-   if: startsWith(github.repository, '{your-username}/')
-   ```
+### Rendering your app
 
-4. Configure `GITHUB_TOKEN` to have the permissions to create Pull Requests:
+```tsx
+import { rezpond } from 'rezpond';
 
-   1. Go to https://github.com/{owner}/{repo}/settings/actions
-   2. Check "Allow GitHub Actions to create and approve pull requests" under "Workflow permissions"
+const { render } = rezpond.createApp( document.getElementById('root') );
 
-5. Add `NPM_TOKEN` to your Repository secrets:
+const App = () => {
+  return (
+    <div>
+      <h1>Hello, World!</h1>
+    </div>
+  );
+};
 
-   1. Go to NPM's [Access Tokens](https://www.npmjs.com/settings/styleshit/tokens) page
-   2. Click "Generate New Token" -> "Classic Token" and follow the instructions (make sure to choose "Automation" for the token type)
-   3. Go to https://github.com/{owner}/{repo}/settings/secrets/actions, and add the generated token as a secret named `NPM_TOKEN`
+rezpond.render(<App />);
+```
 
-## Structure
+### Using `useState` hook
 
-- `src/` - TypeScript source files
-- `**/__tests__/` - Test files
-- `dist/` - Compiled JavaScript files
+```tsx
+import { rezpond } from 'rezpond';
 
-## Tools
+const { render, useState } = rezpond.createApp( document.getElementById('root') );
 
-This template uses [tsup](https://tsup.egoist.dev/) for transpiling & bundling,
-[Vitest](https://vitest.dev/) for testing,
-[ESLint](https://eslint.org/) & [TypeScript ESLint](https://typescript-eslint.io/) (with the strictest configuration) for linting,
-[Prettier](https://prettier.io/) for formatting,
-and [Changesets](https://github.com/changesets/changesets) for versioning & publishing.
+const App = () => {
+  const [count, setCount] = rezpond.useState(0);
 
-## Development Flow
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
 
-1. Add your code & tests to the `src/` directory
+rezpond.render(<App />);
+```
 
-2. Use `npm run test` to run the tests
+### Using `useEffect` hook
 
-3. Use `npm run lint` to lint the code
+```tsx
+import { rezpond } from 'rezpond';
 
-4. Use `npm run format` to format the code
+const { render, useEffect, useState } = rezpond.createApp( document.getElementById('root') );
 
-5. Use `npm run build` to build the package
+const App = () => {
+  const [count, setCount] = rezpond.useState(0);
 
-6. Run `npx changeset` each time you want to add a commit to the changelog (see [Using Changesets](https://github.com/changesets/changesets/blob/main/docs/intro-to-using-changesets.md#using-changesets) for more info)
+  rezpond.useEffect(() => {
+    console.log('Count changed:', count);
+  }, [count]);
 
-7. Commit & push your changes
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
 
-8. The CI will automatically open a PR with the changes, or add the changes to an existing PR
-
-9. Review & merge the PR when you're ready to publish the package
+rezpond.render(<App />);
+```
