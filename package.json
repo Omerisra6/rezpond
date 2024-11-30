@@ -1,12 +1,12 @@
 {
-	"name": "create-typescript-package",
-	"description": "A template project for developing & publishing TypeScript packages",
+	"name": "rezpond",
+	"description": "A simple and lightweight mock implementation of react",
 	"version": "0.0.0",
-	"author": "StyleShit",
+	"author": "Omerisra6",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/StyleShit/create-typescript-package"
+		"url": "https://github.com/Omerisra6/rezpond"
 	},
 	"type": "module",
 	"main": "dist/index.cjs",
