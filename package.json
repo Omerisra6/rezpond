@@ -1,7 +1,7 @@
 {
 	"name": "create-typescript-package",
 	"description": "A template project for developing & publishing TypeScript packages",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
