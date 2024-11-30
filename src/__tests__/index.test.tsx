@@ -1,5 +1,5 @@
 import { describe, expect, it, vitest } from 'vitest';
-import { rezpond } from '../rezpond';
+import { rezpond } from '../index';
 
 describe('Rezpond', () => {
 	describe('render', () => {
