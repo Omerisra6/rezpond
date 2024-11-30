@@ -3,17 +3,20 @@ type Props = { [key: string]: any };
 const createElement = (
 	tag: string | ((props: Props, children: any[] | string) => HTMLElement),
 	props: Props | null,
-	...children: Array<Node|string>
+	...children: Array<Node | string>
 ): HTMLElement => {
-	if (typeof tag === "function") return tag(props || {}, children);
+	if (typeof tag === 'function') return tag(props || {}, children);
 
 	const element = document.createElement(tag);
 
 	Object.entries(props || {}).forEach(([name, value]) => {
-		if (name.startsWith("on") && name.toLowerCase() in window) {
-			element.addEventListener(name.toLowerCase().slice(2), value as EventListenerOrEventListenerObject );
+		if (name.startsWith('on') && name.toLowerCase() in window) {
+			element.addEventListener(
+				name.toLowerCase().slice(2),
+				value as EventListenerOrEventListenerObject,
+			);
 		} else {
-			if ( typeof value === "string" ) {
+			if (typeof value === 'string') {
 				element.setAttribute(name, value.toString());
 			}
 		}
@@ -21,7 +24,7 @@ const createElement = (
 
 	if (!Array.isArray(children)) {
 		appendChild(element, children);
-		return element
+		return element;
 	}
 
 	children.forEach((child) => {
@@ -31,11 +34,16 @@ const createElement = (
 	return element;
 };
 
-const appendChild = (parent: HTMLElement, child: Node | Node[] | string ): void => {
+const appendChild = (
+	parent: HTMLElement,
+	child: Node | Node[] | string,
+): void => {
 	if (Array.isArray(child)) {
-		child.forEach((nestedChild) => { appendChild(parent, nestedChild)}) ;
+		child.forEach((nestedChild) => {
+			appendChild(parent, nestedChild);
+		});
 	} else {
-		if (typeof child === "object" ) {
+		if (typeof child === 'object') {
 			parent.appendChild(child);
 			return;
 		}
@@ -46,7 +54,7 @@ const appendChild = (parent: HTMLElement, child: Node | Node[] | string ): void 
 type SetterFn<T> = (prevState: T) => T;
 type SetState<T> = (newValue: T | SetterFn<T>) => void;
 
-const createApp = (appContainer: HTMLElement ) => {
+const createApp = (appContainer: HTMLElement) => {
 	let Root: (() => HTMLElement) | null = null;
 	const hooks: any[] = [];
 	let index: number = 0;
@@ -61,7 +69,7 @@ const createApp = (appContainer: HTMLElement ) => {
 		const __index: number = index;
 
 		const setState: SetState<T> = (newValue) => {
-			if (typeof newValue === "function") {
+			if (typeof newValue === 'function') {
 				// TypeScript doesn't know if newValue is a function here, so cast it
 				hooks[__index] = (newValue as SetterFn<T>)(state);
 			} else {
@@ -96,11 +104,11 @@ const createApp = (appContainer: HTMLElement ) => {
 	};
 
 	const render = (Component?: () => HTMLElement): void => {
-		appContainer.innerHTML = "";
+		appContainer.innerHTML = '';
 		index = 0;
 		Root = Component || Root;
 		if (Root) {
-			appContainer.appendChild( <Root/> );
+			appContainer.appendChild(<Root />);
 		}
 	};
 
@@ -110,4 +118,4 @@ const createApp = (appContainer: HTMLElement ) => {
 export const rezpond = {
 	createApp,
 	createElement,
-}
+};

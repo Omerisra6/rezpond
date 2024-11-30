@@ -19,6 +19,6 @@
 		"noEmit": true,
 		"lib": ["ESNext", "dom", "dom.iterable"],
 		"jsx": "react",
-		"jsxFactory": "rezpond.createElement",
+		"jsxFactory": "rezpond.createElement"
 	}
 }

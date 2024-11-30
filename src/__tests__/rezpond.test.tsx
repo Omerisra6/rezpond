@@ -1,9 +1,9 @@
 import { describe, expect, it, vitest } from 'vitest';
 import { rezpond } from '../rezpond';
 
-describe( 'Rezpond', () => {
-	describe( 'render', () => {
-		it( 'should render the component', () => {
+describe('Rezpond', () => {
+	describe('render', () => {
+		it('should render the component', () => {
 			const appContainer = document.createElement('div');
 
 			const Root = () => {
@@ -18,18 +18,20 @@ describe( 'Rezpond', () => {
 
 			app.render(Root);
 
-			expect(appContainer.innerHTML).toBe('<div><h1>Hello, World!</h1></div>');
+			expect(appContainer.innerHTML).toBe(
+				'<div><h1>Hello, World!</h1></div>',
+			);
 		});
 	});
 
-	describe( 'useState', () => {
-		it( 'should get the initial state', () => {
+	describe('useState', () => {
+		it('should get the initial state', () => {
 			const appContainer = document.createElement('div');
 
 			const { render, useState } = rezpond.createApp(appContainer);
 
 			const Root = () => {
-				const [ state ] = useState('Hello, World!');
+				const [state] = useState('Hello, World!');
 				return (
 					<div>
 						<h1>{state}</h1>
@@ -39,20 +41,28 @@ describe( 'Rezpond', () => {
 
 			render(Root);
 
-			expect(appContainer.innerHTML).toBe('<div><h1>Hello, World!</h1></div>');
+			expect(appContainer.innerHTML).toBe(
+				'<div><h1>Hello, World!</h1></div>',
+			);
 		});
 
-		it( 'should update the state', () => {
+		it('should update the state', () => {
 			const appContainer = document.createElement('div');
 
 			const { render, useState } = rezpond.createApp(appContainer);
 
 			const Root = () => {
-				const [ state, setState ] = useState(0);
+				const [state, setState] = useState(0);
 				return (
 					<div>
 						<h1 class={'counter'}>{state}</h1>
-						<button onClick={ () => { setState( (state) => state + 1 ) } }>Increase</button>
+						<button
+							onClick={() => {
+								setState((state) => state + 1);
+							}}
+						>
+							Increase
+						</button>
 					</div>
 				) as HTMLElement;
 			};
@@ -69,7 +79,7 @@ describe( 'Rezpond', () => {
 		});
 	});
 
-	describe( 'useEffect', () => {
+	describe('useEffect', () => {
 		it('should run the effect on init', () => {
 			const appContainer = document.createElement('div');
 
@@ -97,12 +107,13 @@ describe( 'Rezpond', () => {
 		it('should run the when it dependencies change', () => {
 			const appContainer = document.createElement('div');
 
-			const { render, useEffect, useState } = rezpond.createApp(appContainer);
+			const { render, useEffect, useState } =
+				rezpond.createApp(appContainer);
 
 			const effect = vitest.fn();
 
 			const Root = () => {
-				const [ state, setState ] = useState(0);
+				const [state, setState] = useState(0);
 
 				useEffect(() => {
 					effect();
@@ -111,7 +122,13 @@ describe( 'Rezpond', () => {
 				return (
 					<div>
 						<h1>{state}</h1>
-						<button onClick={ () => { setState( ( state) => state + 1 ) } }>Increase</button>
+						<button
+							onClick={() => {
+								setState((state) => state + 1);
+							}}
+						>
+							Increase
+						</button>
 					</div>
 				) as HTMLElement;
 			};
