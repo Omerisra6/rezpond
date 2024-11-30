@@ -9,12 +9,16 @@
 		"isolatedModules": true,
 		"verbatimModuleSyntax": true,
 
-		"strict": true,
+		"strict": false,
 		"noUncheckedIndexedAccess": true,
 		"noImplicitOverride": true,
+		"noImplicitAny": false,
+		"noImplicitReturns": false,
 
 		"module": "preserve",
 		"noEmit": true,
-		"lib": ["ESNext", "dom", "dom.iterable"]
+		"lib": ["ESNext", "dom", "dom.iterable"],
+		"jsx": "react",
+		"jsxFactory": "rezpond.createElement",
 	}
 }

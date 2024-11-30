@@ -33,7 +33,7 @@
 		"lint": "concurrently -n eslint,tsc -c magenta,blue 'eslint ./' 'tsc'",
 		"format": "prettier --write ./",
 		"format:check": "prettier --check ./",
-		"build": "tsup src/index.ts --format cjs,esm --dts",
+		"build": "tsup src/index.tsx --format cjs,esm --dts",
 		"release": "npm run build && changeset publish"
 	},
 	"devDependencies": {
@@ -50,5 +50,8 @@
 		"typescript": "^5.5.4",
 		"typescript-eslint": "^8.1.0",
 		"vitest": "^2.0.5"
+	},
+	"dependencies": {
+		"jsdom": "^25.0.1"
 	}
 }
