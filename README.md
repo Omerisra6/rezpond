@@ -19,7 +19,7 @@ import { rezpond } from 'rezpond';
 ```tsx
 import { rezpond } from 'rezpond';
 
-const { render } = rezpond.createApp( document.getElementById('root') );
+const { render } = rezpond.createApp(document.getElementById('root'));
 
 const App = () => {
   return (
@@ -37,7 +37,7 @@ rezpond.render(<App />);
 ```tsx
 import { rezpond } from 'rezpond';
 
-const { render, useState } = rezpond.createApp( document.getElementById('root') );
+const { render, useState } = rezpond.createApp(document.getElementById('root'));
 
 const App = () => {
   const [count, setCount] = rezpond.useState(0);
@@ -58,7 +58,9 @@ rezpond.render(<App />);
 ```tsx
 import { rezpond } from 'rezpond';
 
-const { render, useEffect, useState } = rezpond.createApp( document.getElementById('root') );
+const { render, useEffect, useState } = rezpond.createApp(
+  document.getElementById('root'),
+);
 
 const App = () => {
   const [count, setCount] = rezpond.useState(0);
